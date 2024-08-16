@@ -6,7 +6,8 @@ import { UserAuthService } from './user-auth.service';
   providedIn: 'root',
 })
 export class UserService {
-  PATH_OF_API = 'http://localhost:9090';
+  //PATH_OF_API = 'http://localhost:5000';
+  PATH_OF_API= 'http://springbootapi-env.eba-asmcd5bv.us-east-1.elasticbeanstalk.com';
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(

@@ -10,57 +10,60 @@ import { Product } from '../_model/product.model';
 })
 export class ProductService {
 
+
+  //PATH_OF_API = 'http://localhost:5000';
+  PATH_OF_API= 'http://springbootapi-env.eba-asmcd5bv.us-east-1.elasticbeanstalk.com';
   constructor(private httpClient: HttpClient) { }
 
   public createTransaction(amount) {
-    return this.httpClient.get("http://localhost:9090/createTransaction/"+amount);
+    return this.httpClient.get(this.PATH_OF_API+"/createTransaction/"+amount);
   }
 
   public markAsDelivered(orderId) {
-      return this.httpClient.get("http://localhost:9090/markOrderAsDelivered/"+orderId)
+      return this.httpClient.get(this.PATH_OF_API+"/markOrderAsDelivered/"+orderId)
   }
 
   public getAllOrderDetailsForAdmin(status: string): Observable<MyOrderDetails[]> {
-    return this.httpClient.get<MyOrderDetails[]>("http://localhost:9090/getAllOrderDetails/"+status);
+    return this.httpClient.get<MyOrderDetails[]>(this.PATH_OF_API+"/getAllOrderDetails/"+status);
   }
 
   public getMyOrders(): Observable<MyOrderDetails[]> {
-    return this.httpClient.get<MyOrderDetails[]>("http://localhost:9090/getOrderDetails");
+    return this.httpClient.get<MyOrderDetails[]>(this.PATH_OF_API+"/getOrderDetails");
   }
 
   public deleteCartItem(cartId) {
-    return this.httpClient.delete("http://localhost:9090/deleteCartItem/"+cartId);
+    return this.httpClient.delete(this.PATH_OF_API+"/deleteCartItem/"+cartId);
   }
 
   public addProduct(product: FormData) {
-    return this.httpClient.post<Product>("http://localhost:9090/addNewProduct", product);
+    return this.httpClient.post<Product>(this.PATH_OF_API+"/addNewProduct", product);
   }
 
   public getAllProducts(pageNumber, searchKeyword: string = "") {
-    return this.httpClient.get<Product[]>("http://localhost:9090/getAllProducts?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
+    return this.httpClient.get<Product[]>(this.PATH_OF_API+"/getAllProducts?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
   }
 
   public getProductDetailsById(productId) {
-    return this.httpClient.get<Product>("http://localhost:9090/getProductDetailsById/"+productId);
+    return this.httpClient.get<Product>(this.PATH_OF_API+"/getProductDetailsById/"+productId);
   }
 
   public deleteProduct(productId: number) {
-    return this.httpClient.delete("http://localhost:9090/deleteProductDetails/"+productId);
+    return this.httpClient.delete(this.PATH_OF_API+"/deleteProductDetails/"+productId);
   }
 
   public getProductDetails(isSingleProductCheckout, productId) {
-    return this.httpClient.get<Product[]>("http://localhost:9090/getProductDetails/"+isSingleProductCheckout+"/"+productId);
+    return this.httpClient.get<Product[]>(this.PATH_OF_API+"/getProductDetails/"+isSingleProductCheckout+"/"+productId);
   }
 
   public placeOrder(orderDetails: OrderDetails, isCartCheckout) {
-    return this.httpClient.post("http://localhost:9090/placeOrder/"+isCartCheckout, orderDetails);
+    return this.httpClient.post(this.PATH_OF_API+"/placeOrder/"+isCartCheckout, orderDetails);
   }
 
   public addToCart(productId) {
-    return this.httpClient.get("http://localhost:9090/addToCart/"+productId);
+    return this.httpClient.get(this.PATH_OF_API+"/addToCart/"+productId);
   }
 
   public getCartDetails() {
-    return this.httpClient.get("http://localhost:9090/getCartDetails");
+    return this.httpClient.get(this.PATH_OF_API+"/getCartDetails");
   }
 }
